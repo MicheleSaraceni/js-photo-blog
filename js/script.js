@@ -41,11 +41,32 @@ axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
         </div>`;
             main.innerHTML += template;
         }
-        const btn = document.querySelector(".btn");
 
-        btn.addEventListener("click", () => {
-            const containerimg = document.querySelector(".containerimg");
-            main.removeChild(containerimg);
-        });
+        const card = document.querySelectorAll(".card");
+        console.log(card[0]);
+
+        for (let i = 0; i < card.length; i++) {
+            card[i].addEventListener("click", () => {
+                const template = `<div class="containerimg flex-center">
+            <div class="imgbig">
+                <img src="" alt="">
+            </div>
+            <div class="btn">ESCI</div>
+        </div>`;
+                main.innerHTML += template;
+                //Bottone per uscire dall'img a tutto schermo
+                const btn = document.querySelector(".btn");
+
+                btn.addEventListener("click", () => {
+                    const containerimg = document.querySelector(".containerimg");
+                    main.removeChild(containerimg);
+                });
+            });
+        }
+
+
+
+
+
     });
 
