@@ -41,6 +41,11 @@ axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
         </div>`;
             main.innerHTML += template;
         }
-    });
+        const btn = document.querySelector(".btn");
 
+        btn.addEventListener("click", () => {
+            const containerimg = document.querySelector(".containerimg");
+            main.removeChild(containerimg);
+        });
+    });
 
