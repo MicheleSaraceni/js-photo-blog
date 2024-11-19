@@ -19,3 +19,7 @@ rendi la pagina responsive, in modo che su mobile e tablet le foto si dispongano
  
 **************************************************************/
 
+axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
+    .then((result) => {
+        console.log(result.data);
+    });
