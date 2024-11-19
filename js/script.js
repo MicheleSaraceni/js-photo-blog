@@ -23,14 +23,24 @@ const main = document.querySelector(".container");
 
 axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
     .then((result) => {
-        console.log(result.data);
         let arrayimg = [];
         let arraydesc = [];
         for (let i = 0; i < result.data.length; i++) {
             arrayimg.push(result.data[i].url);
             arraydesc.push(result.data[i].title);
         }
-        console.log(arrayimg);
-        console.log(arraydesc);
+        for (let i = 0; i < result.data.length; i++) {
+            const template = `<div class="card flex-center flex-column">
+            <div class="pin"></div>
+            <div class="img">
+                <img src="${arrayimg[i]}" alt="">
+            </div>
+            <div class="description">
+            ${arraydesc[i]}
+            </div>
+        </div>`;
+            main.innerHTML += template;
+        }
     });
+
 
