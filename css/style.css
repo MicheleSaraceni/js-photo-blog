@@ -55,6 +55,13 @@ h1 {
     background-color: white;
     margin: 20px;
     position: relative;
+    box-shadow: 5px 5px 10px #000000;
+}
+
+.card:hover {
+    transform: rotate(10deg);
+    box-shadow: 15px 15px 20px #000000;
+    cursor: pointer;
 }
 
 .pin {
