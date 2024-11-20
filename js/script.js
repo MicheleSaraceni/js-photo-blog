@@ -25,12 +25,14 @@ axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
     .then((result) => {
         let arrayimg = [];
         let arraydesc = [];
+        let arrayid = [];
         for (let i = 0; i < result.data.length; i++) {
             arrayimg.push(result.data[i].url);
             arraydesc.push(result.data[i].title);
+            arrayid.push(result.data[i].id);
         }
         for (let i = 0; i < result.data.length; i++) {
-            const template = `<div class="card flex-center flex-column">
+            const template = `<div id="${arrayid[i]}" class="card flex-center flex-column">
             <div class="pin"></div>
             <div class="img">
                 <img src="${arrayimg[i]}" alt="">
@@ -42,31 +44,34 @@ axios.get('https://jsonplaceholder.typicode.com/photos?_limit=6')
             main.innerHTML += template;
         }
 
-        const card = document.querySelectorAll(".card");
-        console.log(card[0]);
+        const cards = document.querySelectorAll(".card");
+        console.log(arrayimg);
 
-        for (let i = 0; i < card.length; i++) {
-            card[i].addEventListener("click", () => {
-                const template = `<div class="containerimg flex-center">
-            <div class="imgbig">
-                <img src="" alt="">
-            </div>
-            <div class="btn">ESCI</div>
-        </div>`;
-                main.innerHTML += template;
+        cards.forEach((card, index) => {
+            card.addEventListener("click", () => {
+
+                const containerimg = document.createElement("div");
+                containerimg.classList.add("containerimg", "flex-center");
+                containerimg.innerHTML = `
+                    <div class="imgbig">
+                        <img src="${arrayimg[index]}" alt="">
+                    </div>
+                    <div class="btn">ESCI</div>
+                `;
+
+                main.appendChild(containerimg);
+
                 //Bottone per uscire dall'img a tutto schermo
-                const btn = document.querySelector(".btn");
+                const btn = containerimg.querySelector(".btn");
 
-                btn.addEventListener("click", () => {
-                    const containerimg = document.querySelector(".containerimg");
-                    main.removeChild(containerimg);
-                });
+                if (btn) {
+                    btn.addEventListener("click", () => {
+                        main.removeChild(containerimg);
+                    });
+                }
             });
-        }
-
-
-
-
-
+        });
+    }).catch((error) => {
+        console.log(error);
     });
 
